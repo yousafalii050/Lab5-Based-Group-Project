@@ -8,21 +8,10 @@ import interface_adapter.login.LoginState;
  */
 public class EditProfileViewModel extends ViewModel<EditProfileState> {
     public EditProfileViewModel() {
-        super("log in");
+        super("edit profile");
         setState(new EditProfileState());
     }
 
 }
 
-
-
-
-public class LoginViewModel extends ViewModel<LoginState> {
-
-    public LoginViewModel() {
-        super("log in");
-        setState(new LoginState());
-    }
-
-}
 

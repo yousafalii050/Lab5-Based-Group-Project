@@ -1,41 +1,35 @@
 package interface_adapter.edit_profile;
 
+
+
+
 public class EditProfileState {
+    private String name = "";
+    // private String loginError;
+    private String gender = "";
 
-}
-
-
-
-
-
-
-public class LoginState {
-    private String username = "";
-    private String loginError;
-    private String password = "";
-
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public String getLoginError() {
-        return loginError;
+    //public String getLoginError() {
+    //    return loginError;
+    //}
+
+    public String getGender() {
+        return gender;
     }
 
-    public String getPassword() {
-        return password;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    // public void setLoginError(String usernameError) {
+    //    this.loginError = usernameError;
+    //}
 
-    public void setLoginError(String usernameError) {
-        this.loginError = usernameError;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
 }

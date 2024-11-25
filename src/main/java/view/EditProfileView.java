@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.change_password.LoggedInState;
+import interface_adapter.edit_profile.EditProfileController;
 import interface_adapter.edit_profile.EditProfileState;
 import interface_adapter.edit_profile.EditProfileViewModel;
 import interface_adapter.login.LoginController;
@@ -80,8 +81,8 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                             final EditProfileState currentState = editprofileViewModel.getState();
 
                             editprofileController.execute(
-                                    currentState.getname(),
-                                    currentState.getgender()
+                                    currentState.getName(),
+                                    currentState.getGender()
                             );
                         }
                     }
@@ -92,14 +93,14 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 evt -> {
                     if (evt.getSource().equals(logout)) {
-                        final LoggedInState currentState = EditProfileViewModel.getState();
-                        this.editprofileController.execute(currentState.getname());
+                        final EditProfileState currentState = EditProfileViewModel.getState();
+                        this.editprofileController.execute(currentState.getName(), currentState.getGender());
 
         NameInputField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final LoginState currentState = EditProfileViewModel.getState();
-                currentState.setname(NameInputField.getText());
+                final EditProfileState currentState = EditProfileViewModel.getState();
+                currentState.setName(NameInputField.getText());
                 EditProfileViewModel.setState(currentState);
             }
 
@@ -124,61 +125,60 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
         GenderInputField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final LoginState currentState = editprofileViewModel.getState();
-                currentState.setgender(new String(GenderInputField.getgender()));
+                final EditProfileState currentState = editprofileViewModel.getState();
+                currentState.setGender(new String(GenderInputField.getText()));
                 editprofileViewModel.setState(currentState);
             }
 
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
+//            @Override
+//            public void insertUpdate(DocumentEvent e) {
+//                documentListenerHelper();
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) {
+//                documentListenerHelper();
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) {
+//                documentListenerHelper();
+//            }
+//        });
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
+//        this.add(title);
+//        this.add(NameInfo);
+//        this.add(NameErrorField);
+//        this.add(PasswordInfo);
+//        this.add(buttons);
+//    }
+//
+//    /**
+//     * React to a button click that results in evt.
+//     * @param evt the ActionEvent to react to
+//     */
+//    public void actionPerformed(ActionEvent evt) {
+//        System.out.println("Click " + evt.getActionCommand());
+//    }
 
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
+//    @Override
+//    public void propertyChange(PropertyChangeEvent evt) {
+//        final LoginState state = (LoginState) evt.getNewValue();
+//        setFields(state);
+//        NameErrorField.setText(state.getLoginError());
+//    }
 
-        this.add(title);
-        this.add(NameInfo);
-        this.add(NameErrorField);
-        this.add(PasswordInfo);
-        this.add(buttons);
-    }
+//    private void setFields(EditProfileState state) {
+//        NameInputField.setText(state.getname());
+//        GenderInputField.setText(state.getgender());
+//    }
 
-    /**
-     * React to a button click that results in evt.
-     * @param evt the ActionEvent to react to
-     */
-    public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        final LoginState state = (LoginState) evt.getNewValue();
-        setFields(state);
-        NameErrorField.setText(state.getLoginError());
-    }
-
-    private void setFields(EditProfileState state) {
-        NameInputField.setText(state.getname());
-        GenderInputField.setText(state.getgender());
-    }
-
-    public String getViewName() {
-        return viewName;
-    }
-
-    public void setLoginController(EditProfileController editprofileController) {
-        this.editprofileController = editprofileController;
-    }
-}
-
-
+//    public String getViewName() {
+//        return viewName;
+//    }
+//
+//    public void setLoginController(EditProfileController editprofileController) {
+//        this.editprofileController = editprofileController;
+//    }
+//}
+//
