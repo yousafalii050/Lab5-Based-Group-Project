@@ -1,17 +1,11 @@
 package view;
 
-import interface_adapter.change_password.LoggedInState;
 import interface_adapter.edit_profile.EditProfileController;
 import interface_adapter.edit_profile.EditProfileState;
 import interface_adapter.edit_profile.EditProfileViewModel;
-import interface_adapter.login.LoginController;
-import interface_adapter.login.LoginState;
-import interface_adapter.login.LoginViewModel;
 
-import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -19,33 +13,22 @@ import java.beans.PropertyChangeListener;
 
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import interface_adapter.login.LoginController;
-import interface_adapter.login.LoginState;
-import interface_adapter.login.LoginViewModel;
 
 /**
  * The View for when the user is logging into the program.
  */
-public class EditProfileView extends JPanel implements ActionListener, PropertyChangeListener {
+public class EditProfileView extends JPanel implements PropertyChangeListener {
 
     private final String viewName = "edit profile";
     private final EditProfileViewModel editprofileViewModel;
 
-    private final JTextField NameInputField = new JTextField(15);
+    private final JTextField nameInputFieldDocument = new JTextField(15);
     private final JLabel NameErrorField = new JLabel();
 
     private final JTextField GenderInputField = new JTextField(15);
@@ -64,7 +47,7 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         final LabelTextPanel changename = new LabelTextPanel(
-                new JLabel("Name"), NameInputField);
+                new JLabel("Name"), nameInputFieldDocument);
         final LabelTextPanel changegender = new LabelTextPanel(
                 new JLabel("Gender"), GenderInputField);
 
@@ -93,42 +76,51 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 evt -> {
                     if (evt.getSource().equals(logout)) {
-                        final EditProfileState currentState = EditProfileViewModel.getState();
+                        final EditProfileState currentState = editprofileViewModel.getState();
                         this.editprofileController.execute(currentState.getName(), currentState.getGender());
+                    }
+                }
+        );
+    }
 
-        NameInputField.getDocument().addDocumentListener(new DocumentListener() {
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
 
-            private void documentListenerHelper() {
-                final EditProfileState currentState = EditProfileViewModel.getState();
-                currentState.setName(NameInputField.getText());
-                EditProfileViewModel.setState(currentState);
-            }
+    }
+}
+//        nameInputFieldDocument.getDocument().addDocumentListener(new DocumentListener() {
+//
+//            private void documentListenerHelper() {
+//                final EditProfileState currentState = EditProfileViewModel.getState();
+//                currentState.setName(nameInputFieldDocument.getText());
+//                EditProfileViewModel.setState(currentState);
+//            }
+//
+//            @Override
+//            public void insertUpdate(DocumentEvent e) {
+//                documentListenerHelper();
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) {
+//                documentListenerHelper();
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) {
+//                documentListenerHelper();
+//            }
+//        });
+//
+//        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        GenderInputField.getDocument().addDocumentListener(new DocumentListener() {
-
-            private void documentListenerHelper() {
-                final EditProfileState currentState = editprofileViewModel.getState();
-                currentState.setGender(new String(GenderInputField.getText()));
-                editprofileViewModel.setState(currentState);
-            }
+//        GenderInputField.getDocument().addDocumentListener(new DocumentListener() {
+//
+//            private void documentListenerHelper() {
+//                final EditProfileState currentState = editprofileViewModel.getState();
+//                currentState.setGender(new String(GenderInputField.getText()));
+//                editprofileViewModel.setState(currentState);
+//            }
 
 //            @Override
 //            public void insertUpdate(DocumentEvent e) {
@@ -180,5 +172,5 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
 //    public void setLoginController(EditProfileController editprofileController) {
 //        this.editprofileController = editprofileController;
 //    }
-//}
+//  }
 //
